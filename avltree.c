@@ -16,6 +16,8 @@ struct node *create_node(int x);
 void delete_tree(struct node **old_tree);
 
 int get_height(struct node *root);
+int get_max(struct node *root);
+int get_min(struct node *root);
 
 void left_rotate(struct node **root);
 void right_rotate(struct node **root);
@@ -90,6 +92,22 @@ int get_height(struct node *root)
         return -1;
     else
         return root->height;
+}
+
+int get_max(struct node *root)
+{
+    if (root->right == NULL)
+        return root->data;
+    else
+        return get_max(root->right);
+}
+
+int get_min(struct node *root)
+{
+    if (root == NULL)
+        return root->data;
+    else
+        return get_max(root->left);
 }
 
 void left_rotate(struct node **root)
