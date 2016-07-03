@@ -19,6 +19,7 @@ int get_height(struct node *root);
 
 void left_rotate(struct node **root);
 void right_rotate(struct node **root);
+void balance(struct node **root, int x);
 
 void avl_insert(struct node **root, int x);
 
@@ -121,6 +122,23 @@ void right_rotate(struct node **root)
     *root = y;
 }
 
+void balance(struct node **root, int x)
+{
+    int bal = get_height((*root)->left) - get_height((*root)->right);
+    if (bal > 1)
+    {
+        if (x > (*root)->left->data)
+            left_rotate(&((*root)->left));
+        right_rotate(root);
+    }
+    else if (bal < -1)
+    {
+        if (x < (*root)->right->data)
+            right_rotate(&((*root)->right));
+        left_rotate(root);
+    }
+}
+
 void avl_insert(struct node **root, int x)
 {
     if (*root == NULL)
@@ -139,19 +157,7 @@ void avl_insert(struct node **root, int x)
 
     (*root)->height = 1 + max(left_height, right_height);
 
-    int balance = left_height - right_height;
-    if (balance > 1)
-    {
-        if (x >= (*root)->left->data)
-            left_rotate(&((*root)->left));
-        right_rotate(root);
-    }
-    else if (balance < -1)
-    {
-        if (x < (*root)->right->data)
-            right_rotate(&((*root)->right));
-        left_rotate(root);
-    }
+    balance(root, x);
 }
 
 void print_tree(struct node *root)
