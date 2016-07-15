@@ -35,7 +35,7 @@ int main()
 {
     struct node *my_tree = NULL;
 
-    //srand(time(NULL));
+    /* srand(time(NULL)); */
     srand(0);
 
     int i = 0;
@@ -43,16 +43,16 @@ int main()
     {
         int rand_num = rand() % 1000;
         avl_insert(&my_tree, rand_num);
-        //print_tree(my_tree);
-        //printf("\n");
+        /* print_tree(my_tree); */
+        /* printf("\n"); */
     }
 
 
     avl_delete(&my_tree, 690);
     avl_delete(&my_tree, 763);
 
-    //print_tree(my_tree);
-    //printf("\n");
+    /* print_tree(my_tree); */
+    /* printf("\n"); */
 
     toDot(my_tree);
     delete_tree(&my_tree);
@@ -87,7 +87,6 @@ void delete_tree(struct node **root)
     free(*root);
     *root = NULL;
 
-
     return;
 }
 
@@ -112,7 +111,7 @@ int get_min(struct node *root)
     if (root == NULL)
         return root->data;
     else
-        return get_max(root->left);
+        return get_min(root->left);
 }
 
 void left_rotate(struct node **root)
@@ -160,6 +159,8 @@ void balance(struct node **root, int x)
             right_rotate(&((*root)->right));
         left_rotate(root);
     }
+
+    return;
 }
 
 void avl_insert(struct node **root, int x)
@@ -181,6 +182,8 @@ void avl_insert(struct node **root, int x)
     (*root)->height = 1 + max(left_height, right_height);
 
     balance(root, x);
+
+    return;
 }
 
 void avl_delete(struct node **root, int x)
@@ -189,19 +192,19 @@ void avl_delete(struct node **root, int x)
     {
         if ((*root)->left == NULL && (*root)->right == NULL)
         {
-            // This node has no children
+            /* This node has no children */
             free(*root);
             *root = NULL;
         }
         else if ((*root)->left != NULL && (*root)->right != NULL)
         {
-            // This node has 2 children
+            /* This node has 2 children */
             (*root)->data = get_max((*root)->left);
-            avl_delete(&((*root)->left), (*root)->data);
+            avl_delete(&(*root)->left, (*root)->data);
         }
         else
         {
-            // This node has exactly one child
+            /* This node has exactly one child */
             struct node *child = (*root)->left;
             if (child == NULL)
                 child = (*root)->right;
@@ -212,9 +215,13 @@ void avl_delete(struct node **root, int x)
         return;
     }
     else if (x < (*root)->data)
-        avl_delete(&((*root)->left), x);
+    {
+        avl_delete(&(*root)->left, x);
+    }
     else
-        avl_delete(&((*root)->right), x);
+    {
+        avl_delete(&(*root)->right, x);
+    }
 
     int left_height = get_height((*root)->left);
     int right_height = get_height((*root)->right);
@@ -222,6 +229,8 @@ void avl_delete(struct node **root, int x)
     (*root)->height = 1 + max(left_height, right_height);
 
     balance(root, x);
+
+    return;
 }
 
 void print_tree(struct node *root)
