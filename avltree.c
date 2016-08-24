@@ -77,19 +77,10 @@ struct node *create_node(int x)
 void delete_tree(struct node **root)
 {
     if (*root == NULL)
-    {
         return;
-    }
 
-    if ((*root)->left != NULL)
-    {
-        delete_tree(&(*root)->left);
-    }
-
-    if ((*root)->right != NULL)
-    {
-        delete_tree(&(*root)->right);
-    }
+    delete_tree(&(*root)->left);
+    delete_tree(&(*root)->right);
 
     free(*root);
     *root = NULL;
