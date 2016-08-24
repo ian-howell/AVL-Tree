@@ -35,8 +35,8 @@ int main()
 {
     struct node *my_tree = NULL;
 
-    /* srand(time(NULL)); */
-    srand(0);
+    srand(time(NULL));
+    /* srand(0); */
 
     int i = 0;
     for (i = 0; i < 20; i++)
@@ -47,14 +47,16 @@ int main()
         /* printf("\n"); */
     }
 
+    print_tree(my_tree);
+    printf("\n");
 
     avl_delete(&my_tree, 690);
     avl_delete(&my_tree, 763);
 
-    /* print_tree(my_tree); */
-    /* printf("\n"); */
+    print_tree(my_tree);
+    printf("\n");
 
-    toDot(my_tree);
+    /* toDot(my_tree); */
     delete_tree(&my_tree);
     my_tree = NULL;
 
@@ -74,6 +76,11 @@ struct node *create_node(int x)
 
 void delete_tree(struct node **root)
 {
+    if (*root == NULL)
+    {
+        return;
+    }
+
     if ((*root)->left != NULL)
     {
         delete_tree(&(*root)->left);
@@ -188,6 +195,9 @@ void avl_insert(struct node **root, int x)
 
 void avl_delete(struct node **root, int x)
 {
+    if (*root == NULL)
+        return;
+
     if (x == (*root)->data)
     {
         if ((*root)->left == NULL && (*root)->right == NULL)
