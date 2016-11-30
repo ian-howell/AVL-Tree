@@ -4,16 +4,7 @@
 
 #include "avltree.h"
 
-struct node *create_node(int x)
-{
-    struct node *new_node = (struct node*)malloc(sizeof(struct node));
-    new_node->data = x;
-    new_node->height = 0;
-    new_node->left = NULL;
-    new_node->right = NULL;
-    return new_node;
-}
-
+#include "node.h"
 int max(int a, int b) { return (a > b) ? a : b; }
 
 void delete_tree(struct node **root)

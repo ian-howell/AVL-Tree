@@ -1,12 +1,8 @@
-struct node
-{
-    int data;
-    struct node *left;
-    struct node *right;
-    int height;
-};
+#ifndef AVLTREE_H
+#define AVLTREE_H
 
-struct node *create_node(int x);
+#include "node.h"
+
 void delete_tree(struct node **old_tree);
 
 int get_height(struct node *root);
@@ -24,3 +20,5 @@ void print_tree(struct node *root);
 
 void toDot(struct node *root);
 void r_toDot(struct node *root);
+
+#endif
