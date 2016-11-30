@@ -1,0 +1,9 @@
+# Executable
+treetest
+
+# Object files
+*.o
+
+# Graphviz and image files
+*.gv
+*.ps
