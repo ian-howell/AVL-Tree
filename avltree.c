@@ -2,67 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct node
-{
-    int data;
-    struct node *left;
-    struct node *right;
-    int height;
-};
-
-int max(int a, int b) { return (a > b) ? a : b; }
-
-struct node *create_node(int x);
-void delete_tree(struct node **old_tree);
-
-int get_height(struct node *root);
-int get_max(struct node *root);
-int get_min(struct node *root);
-
-void left_rotate(struct node **root);
-void right_rotate(struct node **root);
-void balance(struct node **root, int x);
-
-void avl_insert(struct node **root, int x);
-void avl_delete(struct node **root, int x);
-
-void print_tree(struct node *root);
-
-void toDot(struct node *root);
-void r_toDot(struct node *root);
-
-int main()
-{
-    struct node *my_tree = NULL;
-
-    srand(time(NULL));
-    /* srand(0); */
-
-    int i = 0;
-    for (i = 0; i < 20; i++)
-    {
-        int rand_num = rand() % 1000;
-        avl_insert(&my_tree, rand_num);
-        /* print_tree(my_tree); */
-        /* printf("\n"); */
-    }
-
-    print_tree(my_tree);
-    printf("\n");
-
-    avl_delete(&my_tree, 690);
-    avl_delete(&my_tree, 763);
-
-    print_tree(my_tree);
-    printf("\n");
-
-    /* toDot(my_tree); */
-    delete_tree(&my_tree);
-    my_tree = NULL;
-
-    return 0;
-
-}
+#include "avltree.h"
 
 struct node *create_node(int x)
 {
