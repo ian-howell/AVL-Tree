@@ -7,11 +7,11 @@
 int main()
 {
     struct node *my_tree = NULL;
+    int i;
 
     /* srand(time(NULL)); */
     srand(0);
 
-    int i = 0;
     for (i = 0; i < 20; i++)
     {
         int rand_num = rand() % 1000;

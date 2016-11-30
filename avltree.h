@@ -6,8 +6,6 @@ struct node
     int height;
 };
 
-static int max(int a, int b) { return (a > b) ? a : b; }
-
 struct node *create_node(int x);
 void delete_tree(struct node **old_tree);
 

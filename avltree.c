@@ -14,6 +14,8 @@ struct node *create_node(int x)
     return new_node;
 }
 
+int max(int a, int b) { return (a > b) ? a : b; }
+
 void delete_tree(struct node **root)
 {
     if (*root == NULL)
@@ -103,6 +105,9 @@ void balance(struct node **root, int x)
 
 void avl_insert(struct node **root, int x)
 {
+    int left_height;
+    int right_height;
+
     if (*root == NULL)
     {
         *root = create_node(x);
@@ -114,8 +119,8 @@ void avl_insert(struct node **root, int x)
     else
         avl_insert(&((*root)->right), x);
 
-    int left_height = get_height((*root)->left);
-    int right_height = get_height((*root)->right);
+    left_height = get_height((*root)->left);
+    right_height = get_height((*root)->right);
 
     (*root)->height = 1 + max(left_height, right_height);
 
@@ -126,6 +131,9 @@ void avl_insert(struct node **root, int x)
 
 void avl_delete(struct node **root, int x)
 {
+    int left_height;
+    int right_height;
+
     if (*root == NULL)
         return;
 
@@ -164,8 +172,8 @@ void avl_delete(struct node **root, int x)
         avl_delete(&(*root)->right, x);
     }
 
-    int left_height = get_height((*root)->left);
-    int right_height = get_height((*root)->right);
+    left_height = get_height((*root)->left);
+    right_height = get_height((*root)->right);
 
     (*root)->height = 1 + max(left_height, right_height);
 
