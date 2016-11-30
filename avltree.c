@@ -4,10 +4,9 @@
 
 #include "avltree.h"
 
-#include "node.h"
 int max(int a, int b) { return (a > b) ? a : b; }
 
-void delete_tree(struct node **root)
+void delete_tree(Node **root)
 {
     if (*root == NULL)
         return;
@@ -21,7 +20,7 @@ void delete_tree(struct node **root)
     return;
 }
 
-int get_height(struct node *root)
+int get_height(Node *root)
 {
     if (root == NULL)
         return -1;
@@ -29,7 +28,7 @@ int get_height(struct node *root)
         return root->height;
 }
 
-int get_max(struct node *root)
+int get_max(Node *root)
 {
     if (root->right == NULL)
         return root->data;
@@ -37,7 +36,7 @@ int get_max(struct node *root)
         return get_max(root->right);
 }
 
-int get_min(struct node *root)
+int get_min(Node *root)
 {
     if (root == NULL)
         return root->data;
@@ -45,11 +44,11 @@ int get_min(struct node *root)
         return get_min(root->left);
 }
 
-void left_rotate(struct node **root)
+void left_rotate(Node **root)
 {
-    struct node *x = *root;
-    struct node *y = x->right;
-    struct node *t = y->left;
+    Node *x = *root;
+    Node *y = x->right;
+    Node *t = y->left;
 
     x->right = t;
     y->left = x;
@@ -60,11 +59,11 @@ void left_rotate(struct node **root)
     *root = y;
 }
 
-void right_rotate(struct node **root)
+void right_rotate(Node **root)
 {
-    struct node *x = *root;
-    struct node *y = x->left;
-    struct node *t = y->right;
+    Node *x = *root;
+    Node *y = x->left;
+    Node *t = y->right;
 
     x->left = t;
     y->right = x;
@@ -75,7 +74,7 @@ void right_rotate(struct node **root)
     *root = y;
 }
 
-void balance(struct node **root, int x)
+void balance(Node **root, int x)
 {
     int bal = get_height((*root)->left) - get_height((*root)->right);
     if (bal > 1)
@@ -94,7 +93,7 @@ void balance(struct node **root, int x)
     return;
 }
 
-void avl_insert(struct node **root, int x)
+void avl_insert(Node **root, int x)
 {
     int left_height;
     int right_height;
@@ -120,7 +119,7 @@ void avl_insert(struct node **root, int x)
     return;
 }
 
-void avl_delete(struct node **root, int x)
+void avl_delete(Node **root, int x)
 {
     int left_height;
     int right_height;
@@ -145,7 +144,7 @@ void avl_delete(struct node **root, int x)
         else
         {
             /* This node has exactly one child */
-            struct node *child = (*root)->left;
+            Node *child = (*root)->left;
             if (child == NULL)
                 child = (*root)->right;
             free(*root);
@@ -173,7 +172,7 @@ void avl_delete(struct node **root, int x)
     return;
 }
 
-void print_tree(struct node *root)
+void print_tree(Node *root)
 {
     if (root == NULL)
     {
@@ -185,7 +184,7 @@ void print_tree(struct node *root)
     print_tree(root->right);
 }
 
-void toDot(struct node *root)
+void toDot(Node *root)
 {
     printf("digraph tree {\n");
     r_toDot(root);
@@ -193,7 +192,7 @@ void toDot(struct node *root)
     return;
 }
 
-void r_toDot(struct node *root)
+void r_toDot(Node *root)
 {
     static int nullCount = 0;
 

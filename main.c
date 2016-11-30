@@ -6,7 +6,7 @@
 
 int main()
 {
-    struct node *my_tree = NULL;
+    Node *my_tree = NULL;
     int i;
 
     /* srand(time(NULL)); */

@@ -1,13 +1,15 @@
 #ifndef NODE_H
 #define NODE_H
-struct node
+
+typedef struct Node Node;
+struct Node
 {
     int data;
-    struct node *left;
-    struct node *right;
+    Node *left;
+    Node *right;
     int height;
 };
 
-struct node *create_node(int x);
+Node *create_node(int x);
 
 #endif
