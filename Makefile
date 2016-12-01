@@ -1,6 +1,6 @@
 HEADERS = $(wildcard *.h)
 CFILES = $(wildcard *.c)
-OBJECTS = $(CFILES:%.cpp=%.o)
+OBJECTS = $(CFILES:%.c=%.o)
 EXE = treetest
 
 C_FLAGS = -Wall --pedantic-errors -O2
